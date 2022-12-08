@@ -12,7 +12,7 @@ output: html_document
 -  Data2: 從母群Poisson distribution（λ=5）中，模擬抽出樣本大小（sample size）為 30 的樣本，共 10000 筆，並計算每筆樣本的**樣本中位數**。
 -  Data3: 從母群Poisson distribution（λ=5）中，模擬抽出樣本大小（sample size）為 30 的樣本，共 10000 筆，並計算每筆樣本的**樣本變異數**。
 
-
+#bfxbxdgfvxdgfbv
 
 
 ```{r data}
