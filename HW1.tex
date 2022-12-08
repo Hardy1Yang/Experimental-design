@@ -1,0 +1,286 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={實驗設計作業一},
+  pdfauthor={楊昊紘},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{實驗設計作業一}
+\author{楊昊紘}
+\date{2020/10/22}
+
+\begin{document}
+\maketitle
+
+2.3 In your own words, describe what is meant by the terms (a) grand
+mean, (b) treatment effect,(c) error effect
+
+2.9 The following data on running time (in seconds) in a straight-alley
+maze were obtained in a CRF-33 design.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A=}\KeywordTok{c}\NormalTok{(}\StringTok{"a1"}\NormalTok{,}\StringTok{"a1"}\NormalTok{,}\StringTok{"a1"}\NormalTok{,}\StringTok{"a2"}\NormalTok{,}\StringTok{"a2"}\NormalTok{,}\StringTok{"a2"}\NormalTok{,}\StringTok{"a3"}\NormalTok{,}\StringTok{"a3"}\NormalTok{,}\StringTok{"a3"}\NormalTok{)}
+\NormalTok{B=}\KeywordTok{c}\NormalTok{(}\StringTok{"b1"}\NormalTok{,}\StringTok{"b2"}\NormalTok{,}\StringTok{"b3"}\NormalTok{,}\StringTok{"b1"}\NormalTok{,}\StringTok{"b2"}\NormalTok{,}\StringTok{"b3"}\NormalTok{,}\StringTok{"b1"}\NormalTok{,}\StringTok{"b2"}\NormalTok{,}\StringTok{"b3"}\NormalTok{)}
+\NormalTok{Y=}\KeywordTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{Data=}\KeywordTok{data.frame}\NormalTok{(Y,A,B)}
+
+\KeywordTok{ggplot}\NormalTok{(Data,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{A,}\DataTypeTok{y=}\NormalTok{Y,}\DataTypeTok{color=}\NormalTok{B))}\OperatorTok{+}\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{group=}\NormalTok{B))}\OperatorTok{+}\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(Data,}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{B,}\DataTypeTok{y=}\NormalTok{Y,}\DataTypeTok{color=}\NormalTok{A))}\OperatorTok{+}\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{group=}\NormalTok{A))}\OperatorTok{+}\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+Graph the interaction. Give a verbal description of the interaction.
+
+2.13 Distinguish among the following concepts. (a) Sample distribution,
+population distribution, and sampling distribution (b)Sample statistic
+and test statistic
+
+2.16 Indicate the type of error or correct decision for each of the
+following. a.A true null hypothesis was rejected. b.The researcher
+failed to reject a false null hypothesis. c.The null hypothesis is false
+and the researcher rejected it. d.The researcher did not reject a true
+null hypothesis. e.A false null hypothesis was rejected. f.The
+researcher rejected the null hypothesis when he or she should have
+failed to reject it.
+
+2.21 What advantages do confidence interval procedures have over null
+hypothesis-testing procedures?
+
+3.3 For each of the following chi-square variables, determine the mean
+and variance.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+\end{enumerate}
+
+3.15 Determine the degrees of freedom for SSTO, SSBG, and SSWG for the
+following CRp designs. CR-3 with n = 10 CR-4 with n1 = 3, n2 = 4, n3 =
+4, n4 = 5
+
+3.18 Explain why a test of is a test of the hypothesis that α1 = α2 =
+\ldots{} = αP = 0.
+
+3.21 Discuss the statement, ``The F test is not appropriate for
+dichotomous data because such data depart radically from the normal
+distribution.
+
+4.5 An experiment was designed to evaluate the effects of different
+levels of training on children's ability to acquire the concept of an
+equilateral triangle. Fifty 3-year-old children were recruited from
+daycare facilities and randomly assigned to one of five groups, with 10
+children in each group. Each group contained an equal number of boys and
+girls. Children in treatment level a1 (visual condition) were shown 36
+blocks, one at a time, and instructed to look at them but not to touch
+them. Children in treatment level a2 (visual plus motor condition)
+looked at the blocks and were permitted to play with them. They also
+were asked to perform specific tactile-kinesthetic exercises, such as
+tracing the perimeter of the blocks with their index finger. Children in
+treatment level a3 (visual plus verbal condition) looked at the blocks
+and were told to notice differences in their shape, color, size, and
+thickness. Children in treatment level a4 (visual plus motor plus verbal
+condition) used a combination of visual, motor, and verbal means of
+stimulus predifferentiation. Children in treatment level a5 (control
+condition) engaged in unrelated play activity. All training was done
+individually. The day after training, the children were shown a
+``target'' block for 5 seconds and then asked to identify the block in a
+group of seven blocks. This task was repeated six times using different
+target blocks. The dependent variable was the number of target blocks
+correctly identified. The following data were obtained. (Experiment
+suggested by Nelson, G. K. Concomitant effects of visual, motor, and
+verbal experiences in young children's concept development. Journal of
+Educational Psychology.)
+
+a.Perform an exploratory data analysis on these data (see Table 4.2-1
+and Figure 4.2-1). Assume that the observations within each treatment
+level are listed in the order in which the observations were obtained.
+Interpret the analysis.
+
+b.Test the null hypothesis μ1 = μ2 = \ldots{} = μ5; let α = .05.
+Construct an ANOVA table and make a decision about the null hypothesis.
+
+c.Compute and interpret and for these data. e.Use the results of part
+(b) as a pilot study and determine the number of subjects required to
+achieve a power of approximately .80. f.Use Appendix Table E.12 to
+determine the number of subjects required to detect a medium
+association; let 1 -- β = .80. g.Determine the number of subjects
+required to achieve a power of .80, where the largest difference among
+means is 0.95σε.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a1=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{a2=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{a3=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{a4=}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{a5=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{order=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{),}\KeywordTok{rep}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{))}
+\NormalTok{Dta=}\KeywordTok{data.frame}\NormalTok{(a1,a2,a3,a4,a5)}
+\NormalTok{Dta.long=}\KeywordTok{pivot_longer}\NormalTok{(Dta,}\DataTypeTok{cols=}\KeywordTok{c}\NormalTok{(a1,a2,a3,a4,a5),}\DataTypeTok{names_to =} \StringTok{"learning"}\NormalTok{)}
+\NormalTok{Dta.long=}\KeywordTok{mutate}\NormalTok{(Dta.long,order)}
+\NormalTok{model1=}\KeywordTok{lm}\NormalTok{(value}\OperatorTok{~}\NormalTok{learning,Dta.long)}
+\NormalTok{Aov=}\KeywordTok{anova}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{including-plots}{%
+\subsection{Including Plots}\label{including-plots}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{omega_sq=(Aov}\OperatorTok{$}\StringTok{`}\DataTypeTok{Sum Sq}\StringTok{`}\NormalTok{[}\DecValTok{1}\NormalTok{]}\OperatorTok{-}\NormalTok{(}\DecValTok{5-1}\NormalTok{)}\OperatorTok{*}\NormalTok{Aov}\OperatorTok{$}\StringTok{`}\DataTypeTok{Mean Sq}\StringTok{`}\NormalTok{[}\DecValTok{2}\NormalTok{])}\OperatorTok{/}\NormalTok{(}\KeywordTok{sum}\NormalTok{(Aov}\OperatorTok{$}\StringTok{`}\DataTypeTok{Sum Sq}\StringTok{`}\NormalTok{)}\OperatorTok{+}\NormalTok{Aov}\OperatorTok{$}\StringTok{`}\DataTypeTok{Mean Sq}\StringTok{`}\NormalTok{[}\DecValTok{2}\NormalTok{])}
+\NormalTok{f=}\KeywordTok{sqrt}\NormalTok{(omega_sq}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{-}\NormalTok{omega_sq))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.st=}\KeywordTok{rstandard}\NormalTok{(model1)}
+\NormalTok{Dta.long=}\KeywordTok{mutate}\NormalTok{(Dta.long,model.st)}
+\NormalTok{Dta.wide=}\KeywordTok{pivot_wider}\NormalTok{(Dta.long,}\DataTypeTok{names_from=}\NormalTok{learning,}\DataTypeTok{values_from =}\NormalTok{ value)}
+\NormalTok{  p1=}\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{filter}\NormalTok{(Dta.long,learning}\OperatorTok{==}\StringTok{"a1"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{order, }\DataTypeTok{y=}\NormalTok{model.st, }\DataTypeTok{color=}\NormalTok{learning)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }
+
+\NormalTok{  p2=}\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{filter}\NormalTok{(Dta.long,learning}\OperatorTok{==}\StringTok{"a2"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{order, }\DataTypeTok{y=}\NormalTok{model.st, }\DataTypeTok{color=}\NormalTok{learning)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }
+\NormalTok{  p3=}\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{filter}\NormalTok{(Dta.long,learning}\OperatorTok{==}\StringTok{"a3"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{order, }\DataTypeTok{y=}\NormalTok{model.st, }\DataTypeTok{color=}\NormalTok{learning)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }
+\NormalTok{  p4=}\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{filter}\NormalTok{(Dta.long,learning}\OperatorTok{==}\StringTok{"a4"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{order, }\DataTypeTok{y=}\NormalTok{model.st, }\DataTypeTok{color=}\NormalTok{learning)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }
+\NormalTok{  p5=}\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{filter}\NormalTok{(Dta.long,learning}\OperatorTok{==}\StringTok{"a5"}\NormalTok{), }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{order, }\DataTypeTok{y=}\NormalTok{model.st, }\DataTypeTok{color=}\NormalTok{learning)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }
+
+\KeywordTok{grid.arrange}\NormalTok{(p1,p2,p3,p4,p5,}\DataTypeTok{nrow=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW1_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(Aov)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: value
+##           Df Sum Sq Mean Sq F value   Pr(>F)   
+## learning   4  21.88  5.4700  5.3745 0.001264 **
+## Residuals 45  45.80  1.0178                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\end{document}

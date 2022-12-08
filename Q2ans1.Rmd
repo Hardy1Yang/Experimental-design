@@ -1,0 +1,131 @@
+---
+title: "problem2_ans"
+author: "Hardy"
+date: "2019年11月17日"
+output: html_document
+---
+# Question 2  [模擬與中央極限定理]
+
+請以電腦模擬的方式隨機生成三筆資料 ：
+	 
+-  Data1: 從母群Poisson distribution（λ=5）中，模擬抽出樣本大小（sample size）為 30 的樣本，共 10000 筆，並計算每筆樣本的**樣本平均數**。
+-  Data2: 從母群Poisson distribution（λ=5）中，模擬抽出樣本大小（sample size）為 30 的樣本，共 10000 筆，並計算每筆樣本的**樣本中位數**。
+-  Data3: 從母群Poisson distribution（λ=5）中，模擬抽出樣本大小（sample size）為 30 的樣本，共 10000 筆，並計算每筆樣本的**樣本變異數**。
+
+
+
+
+```{r data}
+# data simulation
+
+Data1 <- replicate(1000,mean(rexp(50,0.1)))
+
+Data2 <- replicate(1000,var(rexp(50,0.1)))
+
+```
+
+###(1)	請分別畫出三筆資料的直方圖，並簡單描述你觀察到了什麼？[9 %]
+```{r Q1}
+par(mfrow=c(1,2))
+hist(Data1,xlab='sample mean',main = 'Hsitogram of sample mean')
+hist(Data2,xlab='sample variance',main = 'Hsitogram of sample variance')
+```
+--
+**Ans:**   
+  透過觀察這二筆資料的直方圖，我們能發現樣本平均數的分佈較為對稱，而資料點多集中於10附近。樣本變異數則集中於100附近並呈現正偏，且資料點的分散程度較大。
+
+###(2)請分別計算出這三筆資料的統計量，對λ 估計上的Bias和RMSE (root mean square error) 是多少？[12 %]
+
+**Hint: Bias(θ ̂ )=E(θ ̂-θ); RMSE(θ ̂)=√(E((θ ̂-θ)2)).**
+
+
+```{r Q2}
+
+Bias1 <- (mean(Data1-5))
+Bias2 <- (mean(Data2-5))
+Bias3 <- (mean(Data3-5))
+RMSE1 <- sqrt(mean((Data1-5)^2))
+RMSE2 <- sqrt(mean((Data2-5)^2))
+RMSE3 <- sqrt(mean((Data3-5)^2))
+
+```
+--
+**Ans:**
+  樣本平均數估計λ時的Bias為`r Bias1`，RMSE為`r RMSE1`
+  樣本中位數估計λ時的Bias為`r Bias2`，RMSE為`r RMSE2`
+  樣本變異數估計λ時的Bias為`r Bias3`，RMSE為`r RMSE3`
+--
+###(3)你認為哪一種樣本統計量估計 λ 會比較好？請說明你的考量。[5 %]
+
+**Hint: If X~Poisson(λ), we have E(X)=λ and Var(X)=λ.**
+
+**Ans:**
+
+當我們考量Bias時，我們發現樣本平均數與樣本變異數的Bias較樣本中位數小，故在估計的不偏性上的表現較樣本中位數佳。而在考量RMSE時，我們發現樣本中位數與樣本平均數有較低的RMSE，故在估計的有效性上比樣本變異數好。綜合上述考量，在估計母群$\lambda$時，以樣本平均數作為估計量較為合適。
+
+
+###(4)請分別將這三筆資料與標準化常態分配做Q-Q plot，並以圖的結果判斷這三筆資料是否為常態分配？ [3 %] 若是，那為什麼會有這樣的結果？ [3 %]
+```{r Q4}
+par(mfrow=c(1,2))
+qqnorm(Data1,main = "Normal Q-Q plot of \n sample mean")
+qqline(Data1)
+
+qqnorm(Data2,main = "Normal Q-Q plot of \n sample variance")
+qqline(Data2)
+```
+**Ans:**  
+  透過上圖我們能發現樣本平均數的點較多落於對角線上，這代表該分布與常態分配較為接近。而樣本變異數則有許多資料點不是落在對角線上。因此若以圖片作為依據，則判斷樣本平均數應為常態分配，而樣本變異數則不是常態分配。    
+  樣本平均數會趨於常態分配是因為根據中央極限定理:當樣本夠大時，樣本平均數的抽樣分配將趨於常態分配。
+
+###(5)從前一題中，我們能發現有資料好像不是常態分配。現在請將樣本大小提升至100，再重新做一次 (2) 與 (4)，請問得到的結論有不同嗎？ [10 %]
+```{r Q5}
+# data simulation again
+#sample size from 50 to 100 
+
+data1 <- replicate(10000,mean(rexp(100,0.1)))
+data2 <- replicate(10000,var(rexp(100,0.1)))
+
+par(mfrow=c(1,2))
+hist(data1,xlab='sample mean',main = 'Hsitogram of sample mean \n (100 samples)')
+hist(data2,xlab='sample variance',main = 'Hsitogram of sample variance\n(100 samples) ')
+
+
+
+```
+
+
+
+**Ans:**
+
+  將樣本數提升為100後:  
+  
+  樣本平均數的Bias變為`r bias1`(原本為`r Bias1`)，RMSE變為`r rMSE1`(原本為`r RMSE1`)  
+  樣本中位數的Bias變為`r bias2`(原本為`r Bias2`)，RMSE變為`r rMSE2`(原本為`r RMSE2`)  
+  樣本變異數的Bias變為`r bias3`(原本為`r Bias3`)，RMSE變為`r rMSE3`(原本為`r RMSE3`)  
+ 
+  QQplot如下圖所示:
+
+
+```{r plot}
+par(mfrow=c(1,2))
+
+qqnorm(data1,main = "Normal Q-Q plot of \n sample mean (100 samples)" )
+qqline(data1)
+
+qqnorm(data2,main = "Normal Q-Q plot of\n sample variance (100 samples)")
+qqline(data2)
+
+
+```
+
+  提升樣本數後，從直方圖來看樣本平均數的分配仍為左右對稱的分配，而樣本變異數仍呈現負偏。而從QQ plot來看，我們能發現得到結論與(a)和(b)並無不同，而提升樣本數並不會使樣本變異數的分布趨於常態分配。
+
+
+
+###(6)透過上方的觀察，你認為樣本大小增加對樣本平均數、樣本中位數、樣本變異數的分配有何影響？[8 %]
+
+
+**Ans:**  
+  
+  提升樣本數後，樣本平均數的抽樣分配將更接近常態分配，樣本變異數的分配變得較為對稱，樣本中位數則有更多的點的數值為5。因此樣本數提升對這三者皆有影響，但是其中只有樣本平均數會趨於常態。
+

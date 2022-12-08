@@ -1,0 +1,827 @@
+---
+title: "實驗設計作業二"
+author: "楊昊紘"
+date: "2020/10/27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(gtable)
+library(gridExtra)
+library(psych)
+```
+
+### 5.3List the coefficients for the following contrasts.
+
+
+
+#### μ1 versus μ2
+
+$contrast\;coefficient=(1,-1)\\
+contrast:\mu_1-\mu_2=0$
+
+
+#### μ1 versus mean of μ2 and μ3
+
+$contrast\;coefficient=(1,-\frac{1}{2},-\frac{1}{2})\\
+contrast:\mu_1-\frac{(\mu_2+\mu_3)}{2}=0$
+
+#### Mean of μ1 and μ2 versus mean of μ3 and μ4
+
+$contrast\;coefficient=(1,,1,-1,-1)\\
+contrast:\mu_1+\mu_2-(\mu_3+\mu_4)=0$
+
+#### μ1 versus the weighted mean of μ2 and μ3, where μ2 is weighted twice as much as μ3
+$contrast\;coefficient=(1,-\frac{2}{3},-\frac{1}{3})\\
+contrast: \mu_1-\frac{(2\mu_2+\mu_3)}{3}=0$
+
+
+#### μ1 versus mean of μ2, μ3, and μ4
+
+$contrast\;coefficient=(1,,-\frac{1}{3},-\frac{1}{3},-\frac{1}{3})\\
+contrast:\mu_1-\frac{(\mu_2+\mu_3+\mu_4)}{3}=0$
+
+#### Mean of μ1 and μ2 versus mean of μ3, μ4, and μ5
+
+$contrast\;coefficient=(\frac{1}{2},\frac{1}{2},-\frac{1}{3},-\frac{1}{3},-\frac{1}{3})\\
+contrast:\frac{(\mu_1+\mu2)}{2}-\frac{(\mu_3+\mu_4+\mu5)}{3}=0$
+
+#### The weighted mean of μ1 and μ2 versus the weighted mean of μ3 and μ4, where μ1 and μ3 are weighted twice as much as μ2 and μ4
+
+$contrast\;coefficient=(\frac{2}{3},,\frac{1}{3},-\frac{2}{3},-\frac{1}{3})\\
+contrast:\frac{2\mu_1+\mu_2}{3}-\frac{(2\mu_3+\mu_4)}{3}=0$
+
+
+
+
+### 5.4Which of the following meet the requirements for a contrast?
+根據Kirk 課本p.155的定義，滿足一個contrast的定義是至少一個contrast coefficient 不為0，而contrast coefficient 總和為0。以下的例子都滿足第一個條件，接下來檢查那些滿足第二個條件。
+
+#### a.$\mu_1-\mu_2$
+
+
+$\sum\nolimits_{i=1}^2c_i=1-1=0$ <br />
+為一個contrast
+
+#### b.$2\mu_1-\mu_2-\mu_3$ 
+$\sum\nolimits_{i=1}^3c_i=2-1-1=0$ <br />
+為一個contrast
+
+#### c.$\mu1-\frac{1}{3}\mu_2-\frac{1}{3}\mu_3$
+
+$\sum\nolimits_{i=1}^3c_i=1-\frac{1}{3}-\frac{1}{3}=\frac{1}{3}$ <br />
+不為一個contrast
+
+#### d.$\frac{3}{4}\mu1-\frac{1}{4}\mu_2-\frac{1}{4}\mu_3-\frac{1}{4}\mu_4$
+$\sum\nolimits_{i=1}^4c_i=\frac{3}{4}-\frac{1}{4}-\frac{1}{4}-\frac{1}{4}=0$<br /> 
+為一個contrast
+
+#### e.$1\frac{1}{2}\mu1-1\mu_2-1\frac{1}{2}\mu_3$
+
+$\sum\nolimits_{i=1}^3c_i=1\frac{1}{2}-1-1\frac{1}{2}=-1$ <br />
+不為一個contrast
+
+#### f.$1\mu1-\frac{1}{4}\mu_2-\frac{1}{4}\mu_3-\frac{1}{4}\mu_4$
+
+$\sum\nolimits_{i=1}^4c_i=1-\frac{1}{4}-\frac{1}{4}-\frac{1}{4}=\frac{1}{4}$<br /> 
+不為一個contrast
+
+#### g.$\frac{1}{2}\mu1+\frac{1}{2}\mu_2-\frac{1}{3}\mu_3-\frac{1}{3}\mu_4-\frac{1}{3}\mu_4$ 
+
+$\sum\nolimits_{i=1}^5c_i=\frac{1}{2}+\frac{1}{2}-\frac{1}{3}-\frac{1}{3}-\frac{1}{3}=0$ <br />
+為一個contrast
+
+
+故其中a,b,d,g為contrast
+
+
+
+
+### 5.10The effectiveness of three approaches to drug education in junior high school was investigated. The approaches were providing objective scientific information about the physiological and psychological effects of drug use, a1; examining the psychology of drug use, a2; and providing a control condition in which the chemical nature of various drugs was examined, a3. Sixty-three students who did not use drugs were randomly assigned to the groups with the restriction that 21 were assigned to each group. At the conclusion of the educational program, the students evaluated its effectiveness; a high score signified effectiveness. The sample means were Y1 = 25.8, Y2 = 26.7, and ; MSWG = 16.4 and v2 = 3(21 − 1) = 60. The researcher advanced the following a priori null hypotheses: μ1 – μ2 = 0 and (μ1 + μ2)/2 – μ3 = 0. 
+
+#### a.Use a t statistic to test these null hypotheses; let α = .05.
+根據課本p.165的公式，
+$$t-statistic:\;\;\frac{\hat\psi}{\hat\sigma_{\psi}}=\frac{\sum\nolimits_{j=1}^pc_j\bar{Y_{.j}}}{\sqrt{MS_{error}\sum\nolimits_{j=1}^p\frac{c^2_j}{n_j}}}$$
+
+則在$\alpha=0.05$下進行兩次虛無假設檢定，兩次檢定的虛無假設與對立假設分別為:
+$H_0:\mu_1-\mu_2=0$第一組與第二組的組平均相同 
+$H_0:\mu_1-\mu_2\neq0$第一組與第二組的組平均不同 
+
+$H_0:\frac{\mu_1+\mu_2}{2}-\mu_3=0$第一組與第二組的組平均與第三組組平均相同 
+$H_0:\frac{\mu_1+\mu_2}{2}-\mu_3\neq0$第一組與第二組的組平均與第三組組平均不同 
+```{r}
+t1= (25.8-27.6)/sqrt(16.4*(2/21))
+pval1=pt(t1,60)*2
+t2=((25.8+27.6)/2-22.1)/sqrt(16.4*((1+1/4+1/4)/21))
+pval2= (1-pt(t2,60))*2
+```
+
+兩個假設檢定皆為雙尾獨立樣本t檢定，第一個檢定結果如下:
+$\frac{\sum\nolimits_{j=1}^pc_j\bar{Y_{.j}}}{\sqrt{MS_{error}\sum\nolimits_{j=1}^p\frac{c^2_j}{n_j}}}=\frac{25.8-27.6}{\sqrt{16.4\times(\frac{(1)^2}{21}+\frac{(-1)^2}{21})}}$=`r t1`>critical value(`r qt(0.025,60)`)，p-value=`r pval1`>$\alpha(0.05)$，故保留虛無假設，認為第一組與第二組平均並無不同
+
+第二個檢定結果如下:
+
+$\frac{\sum\nolimits_{j=1}^pc_j\bar{Y_{.j}}}{\sqrt{MS_{error}\sum\nolimits_{j=1}^p\frac{c^2_j}{n_j}}}=\frac{\frac{25.8+27.6}{2}-22.1}{\sqrt{16.4\times(\frac{(\frac12)^2}{21}+\frac{(\frac{1}{2})^2}{21}+\frac{(-1)^2}{21})}}$=`r t2 `>critical value(`r qt(0.025,60)`)，p-value=`r pval2`<$\alpha(0.05)$，故拒絕虛無假設，認為第一組與第二組的組平均與第三組組平均不同。
+
+
+
+
+#### b.Construct 100(1 – .05)% confidence intervals for these a priori contrasts.
+```{r}
+psi1=25.8-26.7
+psi1t=qt(0.975,60)*sqrt(16.4*(2/21))
+psi2=(25.8+26.7)/2-22.1
+psi2t=qt(0.975,60)*sqrt(16.4*((1+1/4+1/4)/21))
+```
+
+根據Kirk的p.173，contrast的信賴區間為: 
+$$\hat{\psi_i}-\hat{\psi}(t)<\psi_i<\hat{\psi_i}+\hat{\psi}(t)\\
+\hat{\psi_i}=\sum\nolimits_{j=1}^pc_j\bar{Y_{.j}}\\
+\hat{\psi}(t)=t_{\alpha/2,v}\sqrt{MS_{error}\sum\nolimits_{j=1}^p\frac{c^2_j}{n_j}}$$
+
+
+故第一個contrast($\mu_1-\mu_2$)的信賴區間為:
+
+`r psi1-psi1t`<$\psi_1$<`r psi1+psi1t`
+
+第二個contrast的信賴區間為:
+
+`r psi2-psi2t` <$\psi_2$< `r psi2+psi2t`
+
+#### c.Compute the correlation between the contrasts.
+```{r}
+c1=c(1,-1,0)
+c2=c(1/2,1/2,-1)
+cov_c=sum(c1*c2)
+varc1=sum(c1^2)
+varc2=sum(c2^2)
+cor_c1c2=cov_c/sqrt(varc1*varc2)
+
+
+```
+
+contrast 之間的correlation為:
+
+$$\rho_{ii'}=\frac{\sum\nolimits_{j=1}^p\frac{c_{ij}c_{i'j}}{n}}{\sqrt{(\sum\nolimits_{j=1}^p\frac{c^2_{i'j}}{n_j})(\sum\nolimits_{j=1}^p\frac{c^2_{ij}}{n_j})}}$$
+
+故相關為`r cor_c1c2`
+
+而從contrast coefficient來看，能發現兩個contrast為互為正交，因此相關為0。
+
+#### d.Assume that the sample variances are $\hat{\sigma^2_1=10.6}$, $\hat{\sigma^2_2=9.2}$and$\hat{\sigma^2_2=29.4}$ . Use Welch's t′ statistic to test the null hypotheses.
+
+根據課本p.176的敘述，自由度校正的公式為:
+```{r}
+var=c(10.6,9.2,29.4)
+a1=c1^2*var/21
+b1=c1^4*var^2/(21^2*(20))
+v1=sum(a1)^2/sum(b1)
+v2=sum(c2^2*var/21)^2/sum(c2^4*var^2/(21^2*(20)))
+critical1=qt(0.025,v1)
+critical2=qt(0.975,v2)
+t_1=psi1/sqrt(sum(a1))
+pval_1=pt(t_1,v1)*2
+t_2=psi2/sqrt(sum(c2^2*var/21))
+pval_2= (1-pt(t_2,v2))*2
+```
+
+$$v'=\frac{(\frac{c_1^2\hat\sigma^2_1}{n_1}+\frac{c_2^2\hat\sigma^2_2}{n_1}+...+\frac{c_p^2\hat\sigma^2_p}{n_p})^2}{\frac{c_1^4\hat\sigma^4_1}{n^2_1(n_1-1)}+\frac{c_2^4\hat\sigma^4_2}{n^2_2(n_2-1)}+...+\frac{c_p^4\hat\sigma^4_p}{n^2_p(n_p-1)}}$$
+則校正後的自由度分別為`r v1`和`r v2`。若重新進行Welch's t'test則critical value為`r critical1`、`r critical2`。而兩個假設檢定的t值為`r t_1`、`r t_2`。
+
+則在$\alpha=0.05$下進行兩次虛無假設檢定，兩次檢定的虛無假設與對立假設分別為:
+$H_0:\mu_1-\mu_2=0$第一組與第二組的組平均相同 
+$H_0:\mu_1-\mu_2\neq0$第一組與第二組的組平均不同 
+
+$H_0:\frac{\mu_1+\mu_2}{2}-\mu_3=0$第一組與第二組的組平均與第三組組平均相同 
+$H_0:\frac{\mu_1+\mu_2}{2}-\mu_3\neq0$第一組與第二組的組平均與第三組組平均不同 
+
+
+第一個檢定結果如下:
+t'value=`r t_1`>critical value(`r critical1`)，p-value=`r pval_1`>$\alpha(0.05)$，故保留虛無假設，認為第一組與第二組平均並無不同
+
+第二個檢定結果如下:
+
+t'value=`r t_2 `>critical value(`r critical2`)，p-value=`r pval_2`<$\alpha(0.05)$，故拒絕虛無假設，認為第一組與第二組的組平均與第三組組平均不同。
+
+### 5.12For the experiment in Exercise 10, what are the following error rates?
+
+#### a.Per contrast
+
+$\alpha_{PC}=0.05$
+
+#### b.Familywise
+
+$\alpha_{FW}=1-(1-\alpha_{PC})^C$=`r 1-(1-0.05)^2`
+
+#### c.Per family
+$\alpha_{PF}=\sum\nolimits_{j=1}^C\alpha_{PC}$=0.1
+
+
+### 5.14Suppose that 1000 experiments involving a CR-5 design have been performed, and in each experiment, hypotheses for all possible pairwise comparisons have been tested. Assume that 80 Type I errors are committed, and these occur in 60 of the 1000 experiments. Compute the following.
+
+跟據Kirk課本p.161，三個error rate的定義如下:
+
+$Per-contrast \;error \;rate(\alpha_{PC})=\frac{Number\;of\;contrasts\;falsely\;declared\;significant}{Number\;of\;contrasts}$
+$Familywise \;error \;rate(\alpha_{FW})=\frac{Number\;of\;families\;with\;
+at\;least\;one\;contrast\;falsely\;declared\;significant}{Number\;of\;families}$
+
+$Per-family \;error \;rate(\alpha_{PF})=\frac{Number\;of\;contrasts\;falsely\;declared\;significant}{Number\;of\;families}$
+
+
+#### a.Error rate per contrast
+
+$\alpha_{PC}=\frac{Number\;of\;contrasts\;falsely\;declared\;significant}{Number\;of\;contrasts}=\frac{80}{1000\times C^5_2}=\frac{80}{10000}=0.008$
+
+#### b.Error rate familywise
+$\alpha_{FW}=\frac{Number\;of\;families\;with\;
+at\;least\;one\;contrast\;falsely\;declared\;significant}{Number\;of\;families})=\frac{60}{1000}=0.06$
+
+#### c.Error rate per family
+
+$\alpha_{PF}=\frac{Number\;of\;contrasts\;falsely\;declared\;significant}{Number\;of\;families}=\frac{80}{1000}=0.08$
+
+### 5.21Exercise 10 described an experiment to evaluate the effectiveness of three approaches to drug education in junior high school. Assume that the omnibus null hypothesis was rejected at the .05 level of significance.
+
+#### a.Use Scheffé's procedure to test the following null hypotheses:
+```{r}
+mean <- c(25.8,26.7,22.1)
+MSE=16.4
+Con1=c(1,0,-1)
+Con2=c(0,1,-1)
+Con3=c(1/2,1/2,-1)
+Phi1=sum(mean*Con1)^2
+Phi2=sum(mean*Con2)^2
+Phi3=sum(mean*Con3)^2
+F1=Phi1/(MSE*sum(Con1^2/21))
+F2=Phi2/(MSE*sum(Con2^2/21))
+F3=Phi3/(MSE*sum(Con3^2/21))
+critical3=2*qf(0.95,2,60)
+
+```
+
+$$ \mu_1-\mu_3=0,\;\;\mu_2-\mu_3=0\;\;\frac{\mu_1+\mu2}{2}-\mu_3=0\\Let \;\;\alpha_{FW}=0.05$$
+
+根據課本p.198的定義，Scheffe's test為:
+
+$$FS=\frac{(\sum\nolimits_{j=1}^pc_j\bar{Y_{.j}})^2}{MS_{error}\sum\nolimits_{j=1}^p\frac{c^2_j}{n_j}}$$
+
+則三個contrast分別為$\psi_1、\psi_2、\psi_3$，虛無假設與對立假設分別為:
+
+$$
+H_0:\psi_1=0\\
+H_1:\psi_1\neq0\\
+$$
+
+$$
+H_0:\psi_2=0\\
+H_1:\psi_2\neq0\\
+$$
+
+$$
+H_0:\psi_3=0\\
+H_1:\psi_3\neq0\\
+$$
+
+而透過以上公式得到的三個contrast的FS值分別為`r F1`、`r F2`和`r F3`。而critical value為`r critical3`($(3-1)F_{(0.05;2,60)}$)，故三個contrast皆達顯著，因此都拒絕虛無假設。認為第一組與第三組組平均不同，認為第二組與第三組組平均不同，以及第三組與第一和第二組的組平均不同。
+
+#### b.Suppose that the sample variances for this problem are $\hat{\sigma^2_1}=4.1$,$\hat{\sigma^2_2}=13.3$ and$\hat{\sigma^2_3}=31.8$. Use the Brown-Forsythe procedure to test the null hypotheses.
+
+```{r}
+mean=c(25.8,26.7,22.1)
+var=c(4.1,13.3,31.8)
+MSE=16.4
+Con1=c(1,0,-1)
+Con2=c(0,1,-1)
+Con3=c(1/2,1/2,-1)
+Phi1=sum(mean*Con1)^2
+Phi2=sum(mean*Con2)^2
+Phi3=sum(mean*Con3)^2
+F_1=Phi1/(sum(Con1^2*var/21))
+F_2=Phi2/(sum(Con2^2*var/21))
+F_3=Phi3/(sum(Con3^2*var/21))
+
+
+a1=Con1^2*var/21
+b1=Con1^4*var^2/(21^2*(20))
+V1=sum(a1)^2/sum(b1)
+V2=sum(Con2^2*var/21)^2/sum(Con2^4*var^2/(21^2*(20)))
+V3=sum(Con3^2*var/21)^2/sum(Con3^4*var^2/(21^2*(20)))
+
+p_val1=1-pf(F_1,2,V1)
+p_val2=1-pf(F_2,2,V2)
+p_val3=1-pf(F_3,2,V3)
+
+
+critical_1=2*qf(0.95,2,V1)
+critical_2=2*qf(0.95,2,V2)
+critical_3=2*qf(0.95,2,V3)
+
+
+
+
+
+
+```
+
+根據p.199，BF-test的公式為:
+$$FBF=\frac{(\sum\nolimits_{j=1}^pc_j\bar{Y_{.j}})^2}{\sum\nolimits_{j=1}^p\frac{c^2_j\hat\sigma^2_j}{n_j}}$$
+而該F檢定的分子自由度為p-1，分母自由度則是Welch的修正自由度，修正公式為:
+
+$$
+v'=\frac{(\frac{c_1^2\hat\sigma^2_1}{n_1}+\frac{c_2^2\hat\sigma^2_2}{n_1}+...+\frac{c_p^2\hat\sigma^2_p}{n_p})^2}{\frac{c_1^4\hat\sigma^4_1}{n^2_1(n_1-1)}+\frac{c_2^4\hat\sigma^4_2}{n^2_2(n_2-1)}+...+\frac{c_p^4\hat\sigma^4_p}{n^2_p(n_p-1)}}
+$$
+三個test校正後的分母自由度為`r V1`、`r V2`、`r V3`，若以上述資訊進行BF-test:
+
+
+三個contrast分別為$\psi_1、\psi_2、\psi_3$，虛無假設與對立假設分別為:
+
+$$
+H_0:\psi_1=0\\
+H_1:\psi_1\neq0\\
+$$
+$$
+H_0:\psi_2=0\\
+H_1:\psi_2\neq0\\
+$$
+$$
+H_0:\psi_3=0\\
+H_1:\psi_3\neq0\\
+$$
+
+
+根據檢定結果，第一個contrast的FBF為`r F_1`>critical value`r critical_1`，pvalue(`r p_val1`)<$\alpha$(0.05)。故拒絕虛無假設，認為第一組與第三組的組平均不同。
+
+而第二個contrast的FBF為`r F_2`>critical value`r critical_2`，pvalue(`r p_val2`)<$\alpha$(0.05)。故拒絕虛無假設，認為第二組與第三組的組平均不同。
+
+第二個contrast的FBF為`r F_3`>critical value`r critical_3`，pvalue(`r p_val3`)<$\alpha$(0.05)。故拒絕虛無假設，認為第一組和第二組的平均與第三組的組平均不同。
+
+
+### 6.2
+```{r}
+a1=c(342,180,259,300,164,265,359,211)
+a2=c(171,213,278,302,359,280,402,235)
+a3=c(245,106,176,180,87,232,280,134)
+a4=c(271,75,109,181,59,132,204,89)
+order=rep(c(1:8),rep(4,8))
+Dta=data.frame(a1,a2,a3,a4)
+Dta.long=pivot_longer(Dta,cols=c(a1,a2,a3,a4),names_to = "length_of_social_interaction")
+Dta.long=mutate(Dta.long,order)
+model1=lm(value~length_of_social_interaction,Dta.long)
+Aov=anova(model1)
+##
+model.st=rstandard(model1)
+Dta.long=mutate(Dta.long,model.st)
+```
+
+#### a.Perform an exploratory data analysis on these data (see Table 4.2-1 and Figure 4.2-1). Assume that the observations within each treatment level are listed in the order in which the observations were obtained. Interpret the analysis.
+
+```{r}
+
+Dta  %>% describe( ) %>% .[,c(1:4)] %>% round(.,digit=2)
+
+```
+
+從以上描述統計的結果我們發現各組的樣本平均有明顯不同，而各組的樣本標準差相近，應該符合變異數同質的假設。
+```{r}
+
+ggplot(Dta.long, aes(x=length_of_social_interaction, y=value, color=length_of_social_interaction)) + geom_boxplot()+  
+  geom_jitter(position = position_jitter(width = 0.1, height = 0))
+
+```
+
+而從盒鬚圖加上散佈圖能發現每一組各組中沒有明顯的outlier。
+
+```{r}
+
+Dta.wide=pivot_wider(Dta.long,names_from=length_of_social_interaction,values_from = value)
+ggplot(Dta.long, aes(x=length_of_social_interaction, y=model.st, fill=length_of_social_interaction)) + 
+  geom_dotplot(binaxis = "y", stackdir =  "up" )+
+  labs(title="standardized residual plot",y="standardized residual")
+```
+而從standardized residual得分布圖也能發現各組的資料點都落於2個標準差之內，所以也無明顯outlier，應該也符合常態分配假設。
+
+
+```{r}
+
+model.st=rstandard(model1)
+Dta.long=mutate(Dta.long,model.st)
+
+#應該要寫成loop的，但是我不知為何一直失敗QQ
+  p1=ggplot(filter(Dta.long,length_of_social_interaction=="a1"), aes(x=order, y=model.st))+
+    labs(title="a1 standardized residual order plot ",y="standardized   residual")+
+    geom_line()+
+    geom_point() 
+  p2=ggplot(filter(Dta.long,length_of_social_interaction=="a2"), aes(x=order, y=model.st)) +
+    labs(title="a2 standardized residual order plot ",y="standardized residual")+
+    geom_line()+
+    geom_point() 
+  p3=ggplot(filter(Dta.long,length_of_social_interaction=="a3"), aes(x=order, y=model.st)) +
+    labs(title="a3 standardized residual order plot ",y="standardized residual")+
+    geom_line()+
+    geom_point() 
+  p4=ggplot(filter(Dta.long,length_of_social_interaction=="a4"), aes(x=order, y=model.st)) +
+    labs(title="a4 standardized residual order plot ",y="standardized residual")+
+     geom_line()+
+    geom_point() 
+
+
+grid.arrange(p1,p2,p3,p4,nrow=2)
+```
+
+而各資料點的收集順序與standardized residual的大小也沒有明顯的趨勢，所以資料點的收集順序應該與資料點大小無關。
+
+
+
+
+#### b.Use an ANOVA F test to determine whether there is a trend in the data; let α = .05.
+
+
+
+
+
+在$\alpha=0.05$下檢驗是否有trend，則虛無假設是
+$$H_0:\mu_1=\mu_2=\mu_3=\mu_4$$
+代表各組平均相同，並不存在趨勢。而對立假設為
+$$H_1:\mu_i\neq\mu_j \;for\;some \;i\;and\;j$$
+代表至少有兩組平均不同，存在趨勢。而檢定結果如下:
+
+```{r}
+print(Aov)
+```
+
+F值為6.667大於critical value(`r qf(0.95,3,28)`)，而p value為0.001544<$\alpha(0.05)$，故拒絕虛無假設，接受對立假設，應該存在趨勢。
+
+
+
+
+
+
+
+#### c.Assume that a priori hypotheses about the p − 1 trend contrasts have been advanced. 
+
+##### (i) Test the null hypothesis for each of the trend contrasts at α = .05.
+
+
+```{r}
+n=8
+a1=-7/4
+C=c(0,1,2,4)
+C1=a1+C
+
+b2=-sum(C1*C^2)/sum(C1*C)
+a2=-(sum(C)*b2+sum(C^2))/4
+
+C2=a2+b2*C+C^2
+
+c3=-sum(C2*C^3)/sum(C2*C^2)
+b3=-(sum(C1*C^2*c3)+sum(C1*C^3))/sum(C1*C)
+a3=-sum(C^3+c3*C^2+b3*C)/4
+
+C3=a3+b3*C+c3*C^2+C^3
+## 4a2+7b2+sum(C^2)=0
+##sum(C1)*a2 sum(C1*C)*b2+sum(C1*C^2)
+
+```
+
+由於不同組別之間的獨變項的距離並非等距，因此需要根據課本Appendix C.的方法來計算Polynomial coefficient，計算方式如上方r code呈現。
+```{r}
+con_lin=C1
+con_quad=C2
+con_cub=C3
+psi_lin=sum(sapply(Dta,mean)*con_lin)
+SS_lin=8*psi_lin^2/sum(con_lin^2)
+psi_quad=sum(sapply(Dta,mean)*con_quad)
+SS_quad=8*psi_quad^2/sum(con_quad^2)
+psi_cub=sum(sapply(Dta,mean)*con_cub)
+SS_cub=8*psi_cub^2/sum(con_cub^2)
+F_lin=SS_lin/Aov$`Mean Sq`[2]
+F_quad=SS_quad/Aov$`Mean Sq`[2]
+F_cub=SS_cub/Aov$`Mean Sq`[2]
+
+plin=1-pf(F_lin,1,28)
+pquad=1-pf(F_quad,1,28)
+pcub=1-pf(F_cub,1,28)
+#pnlin=1-pf(F
+           
+           
+```
+以下進行三個trend的的檢定，
+linear trend 的虛無假設與對立假設為
+$$
+H_0:\psi_{lin}=0\\
+H_1:\psi_{lin}\neq0\\
+$$
+而linear trend的檢定的F值為`r F_lin `>critical value(`r qf(0.95,1,28)`)，p value為`r plin`<$\alpha$(0.05)，故拒絕虛無假設，認為此次實驗資料有linear trend。
+
+quadratic trend 的虛無假設與對立假設為
+$$
+H_0:\psi_{quad}=0\\
+H_1:\psi_{quad}\neq0\\
+$$
+
+而quadratic trend的檢定的F值為`r F_quad `<critical value(`r qf(0.95,1,28)`)，p value為`r pquad`>$\alpha$(0.05)，故保留虛無假設，認為此次實驗資料無quadratic trend。
+
+cubic trend 的虛無假設與對立假設為
+$$
+H_0:\psi_{cubic}=0\\
+H_1:\psi_{cubic}\neq0\\
+$$
+
+而cubic trend的檢定的F值為`r F_cub `<critical value(`r qf(0.95,1,28)`)，p value為`r pcub`>$\alpha$(0.05)，故保留虛無假設，認為此次實驗資料無cubic trend。
+
+故該次實驗應該只有linear trend而沒有quadratic trend和cubic trend。
+
+#####  (ii) What proportion of the population variance in the dependent variable is accounted for by each of the trend contrasts? 
+
+```{r}
+MSWG=Aov$`Mean Sq`[2]
+SSTO=Aov$`Sum Sq`[1]+Aov$`Sum Sq`[2]
+wlin=(SS_lin-MSWG)/(SSTO+MSWG)
+wquad=(SS_quad-MSWG)/(SSTO+MSWG)
+wcub=(SS_cub-MSWG)/(SSTO+MSWG)
+
+
+```
+
+根據課本，公式為
+
+$$
+\hat{\omega^2_{Y|\psi}}=\frac{SS\hat\psi-MSWG}{SSTO+MSWG}
+$$
+
+$\hat{\omega^2_{Y|\psi_lin}}$=`r wlin`
+
+$\hat{\omega^2_{Y|\psi_quad}}$=`r wquad`
+
+$\hat{\omega^2_{Y|\psi_cubic}}$=`r wcub`
+
+##### (iii) Write the simplest polynomial equation necessary to adequately describe the trend. 
+```{r}
+beta0=mean(Dta.long$value)
+beta1=(psi_lin)/sum(con_lin^2)
+```
+
+則較適合描述的方程式為一次方的線性方程式，其中$\hat\beta_0$=`r beta0`，$\hat\beta_1$=`r beta1`。則方程式為
+$$\hat\mu_j=215+(-34.85714)c{_1j}$$
+
+##### (iv) Make a figure that compares the observed and the predicted tends.
+```{r}
+predicted=beta0+beta1*C1
+mean=sapply(Dta,mean)
+Morphine_dose=c(0,2,4,8,0,2,4,8)
+group=c("mean","mean","mean","mean","predicted","predicted","predicted","predicted")
+value=c(mean,predicted)
+fit=data.frame(Morphine_dose,value,group)
+ggplot(fit,aes(x=Morphine_dose, y=value,color=group))+
+    labs(title="Predicted versus data ",x="Morphine_dosage",y="Duration of social interaction")+
+    geom_line()+
+    geom_point() 
+```
+
+
+
+#####  (v) Determine whether the patterns of the predicted and the observed means are different.
+```{r}
+con_lin=C1
+psi_lin=sum(sapply(Dta,mean)*con_lin)
+SS_lin=8*psi_lin^2/sum(con_lin^2)
+SS_nlin=Aov$`Sum Sq`[1]-SS_lin
+#F_lin=SS_lin/Aov$`Mean Sq`[2]
+F_nlin=SS_nlin/(Aov$`Mean Sq`[2]*2)
+#plin=1-pf(F_lin,1,28)
+pnlin=1-pf(F_nlin,1,28)
+```
+
+
+
+
+而之後檢定是否有departure from pattern的現象，須確認是否有linear trend以外的趨勢，則虛無假設與對立假設為:
+$$
+H_0:\psi_{quad}\;and\;\psi_{cubic}=0\\
+H_1:\psi_{quad}\;and\;\psi_{cubic}\neq0\\
+$$
+檢定的F值為`r F_nlin `<critical value(`r qf(0.95,2,28)`)，p value為`r pnlin`>$\alpha$(0.05)，故保留對立假設，認為應該不存在quadratic trend和cubic trend，沒有departure from pattern的現象。
+
+
+#### d.Use Dunnett's multiple comparison statistic to determine which population treatment means differ from the control group mean. Compute omega squared for the contrasts that are significant.
+```{r}
+dn1=c(1,-1,0,0)
+dn2=c(1,0,-1,0)
+dn3=c(1,0,0,-1)
+tdn1=sum(dn1*mean)/sqrt(2*MSWG/8)
+tdn2=sum(dn2*mean)/sqrt(2*MSWG/8)
+tdn3=sum(dn3*mean)/sqrt(2*MSWG/8)
+SS3=sum(dn3*mean)^2*8/sum(dn3^2)
+omega3=(SS3-MSWG)/(SSTO+MSWG)
+```
+
+根據課本p.177，Dunnet's test statistic為:
+
+$$tDN=\frac{\hat\psi_i}{\hat\sigma_{\psi_i}}=\frac{c_j\bar{Y_{.j}}+c_j'\bar{Y_{.j'}}}{\sqrt{\frac{2MS_{error}}{n}}}$$
+而透過課本appendix E7知道在雙尾檢定且$\alpha=0.05$時critical value絕對值介於2.47到2,51之間，故設定為2.51，
+
+則三個contrast的tDn value為
+
+控制組vs.morphine dosage=2 mg/kg:`r tdn1`
+
+控制組vs.morphine dosage=4 mg/kg:`r tdn2`
+
+控制組vs.morphine dosage=8 mg/kg:`r tdn3`
+
+其中大於critical value達顯著的contrast為控制組和嗎啡攝取量為8毫克每公斤的組別，而該contrast的$\hat\omega_{tDN3}^2$=`r omega3`。
+
+
+#### e.Compute r and $\hat{\eta}$.
+```{r}
+
+r=sqrt(SS_lin/SSTO)
+eta=sqrt(Aov$`Sum Sq`[1]/SSTO)
+
+```
+
+根據課本p.225:
+
+$$r=\sqrt{\frac{SS\hat\psi_{lin}}{SSTO}}\\
+\hat{\eta}=\sqrt{\frac{SSBG}{SSTO}}$$
+
+則r為`r r` 
+
+而$\hat{\eta}$為`r eta`
+
+### 7.8Write the following systems of equations using vectors and matrices.
+
+#### a.CR-2 design
+$$Y_{11}=\mu+\alpha_11+\alpha_20+\epsilon_{1(1)}\\
+Y_{21}=\mu+\alpha_11+\alpha_20+\epsilon_{2(1)}\\
+Y_{12}=\mu+\alpha_10+\alpha_21+\epsilon_{1(2)}\\
+Y_{22}=\mu+\alpha_10+\alpha_21+\epsilon_{2(2)}$$
+
+
+
+$$\begin{bmatrix}
+ Y_{11}\\
+Y_{21} \\
+Y_{12}\\
+Y_{22}
+\end{bmatrix} = 
+\begin{bmatrix}
+1 & 1 & 0 \\
+1 & 1 & 0 \\
+1 & 0 & 1\\
+1 & 0 & 1
+\end{bmatrix}\times
+\begin{bmatrix}
+\mu\\
+\alpha_1\\
+\alpha_2
+\end{bmatrix}+
+\begin{bmatrix}
+\epsilon_{1(1)}\\
+\epsilon_{2(1)}\\
+\epsilon_{1(2)}\\
+\epsilon_{2(2)}
+\end{bmatrix}
+$$
+
+#### b.CR-3 design
+
+$$Y_{11}=\mu+\alpha_11+\alpha_20+\alpha_30+\epsilon_{1(1)}\\
+Y_{21}=\mu+\alpha_11+\alpha_20+\alpha_30+\epsilon_{2(1)}\\
+Y_{12}=\mu+\alpha_10+\alpha_21+\alpha_30+\epsilon_{1(2)}\\
+Y_{22}=\mu+\alpha_10+\alpha_21+\alpha_30+\epsilon_{2(2)}\\
+Y_{13}=\mu+\alpha_10+\alpha_20+\alpha_31+\epsilon_{1(3)}\\
+Y_{23}=\mu+\alpha_10+\alpha_20+\alpha_31+\epsilon_{2(3)}\\
+$$
+
+
+$$
+\begin{bmatrix}
+ Y_{11}\\
+Y_{21} \\
+Y_{12}\\
+Y_{22}\\
+Y_{13}\\
+Y_{23}
+\end{bmatrix} = 
+\begin{bmatrix}
+1 & 1 & 0 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0\\
+1 & 0 & 1 & 0\\
+1 & 0 & 0 & 1\\
+1 & 0 & 0 & 1
+\end{bmatrix}\times
+\begin{bmatrix}
+\mu\\
+\alpha_1\\
+\alpha_2\\
+\alpha_3
+\end{bmatrix}+
+\begin{bmatrix}
+\epsilon_{1(1)}\\
+\epsilon_{2(1)}\\
+\epsilon_{1(2)}\\
+\epsilon_{2(2)}\\
+\epsilon_{1(3)}\\
+\epsilon_{2(3)}
+\end{bmatrix}
+$$
+
+
+#### c.Explain why the X matrices for parts (a) and (b) are of less than full rank.
+根據Kirk課本p.241的定義，rank代表的是該矩陣中線性獨立的行數(或列數)。而full rank代表該矩陣的rank和行(或列)中較小的數相等，即該矩陣的每一行都是彼此線性獨立的。而以下的運算顯示前半部的兩個矩陣的最後一行都能透過其他行的線性組合獲得，因此不是full Rank。
+$$ 
+in\;part(a):\\
+column \;of\;\alpha_2=\begin{bmatrix}
+1 & 1 & 0 \\
+1 & 1 & 0 \\
+1 & 0 & 1\\
+1 & 0 & 1
+\end{bmatrix}\times
+\begin{bmatrix}
+0\\
+0\\
+1\\
+\end{bmatrix}=
+\begin{bmatrix}
+0\\
+0\\
+1\\
+1\\
+\end{bmatrix}\\
+column \;of\;\mu-column \;of\;\alpha_1=\begin{bmatrix}
+1 & 1 & 0 \\
+1 & 1 & 0 \\
+1 & 0 & 1\\
+1 & 0 & 1
+\end{bmatrix}\times\begin{bmatrix}
+1\\
+-1\\
+0\\
+\end{bmatrix}=
+\begin{bmatrix}
+0\\
+0\\
+1\\
+1\\
+\end{bmatrix}\\
+\alpha_2\;can\;be\;determined\;by\;linear\;combination\;of\;\mu\;and\;\alpha_1
+$$
+
+$$ 
+in\;part(b):\\
+column \;of\;\alpha_3=\begin{bmatrix}
+1 & 1 & 0 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0\\
+1 & 0 & 1 & 0\\
+1 & 0 & 0 & 1\\
+1 & 0 & 0 & 1
+\end{bmatrix}\times
+\begin{bmatrix}
+0\\
+0\\
+0\\
+1
+\end{bmatrix}=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0\\
+1\\
+1\\
+\end{bmatrix}\\
+column \;of\;\mu-column \;of\;\alpha_1-column \;of\;\alpha_2=\begin{bmatrix}
+1 & 1 & 0 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 0\\
+1 & 0 & 1 & 0\\
+1 & 0 & 0 & 1\\
+1 & 0 & 0 & 1
+\end{bmatrix}\times
+\begin{bmatrix}
+1\\
+-1\\
+-1\\
+0\\
+\end{bmatrix}=
+\begin{bmatrix}
+0\\
+0\\
+0\\
+0\\
+1\\
+1\\
+\end{bmatrix}\\
+\alpha_3\;can\;be\;determined\;by\;linear\;combination\;of\;\mu\;and\;\alpha_1\;and\;\alpha_2
+$$
+$$\\
+\\thus\;X\;matrices\;in\;part(a)\;and\;part(b)\;are\;singular$$
+
+### 7.9What special properties do least squares estimators have?
+
+根據課本的解釋，least squares estimators為unbiased estimator且具有所有unbiased estimator中最小的變異數。另外使用最小平方法時，有別於最大概似估計法，不需要假設error term的分配。

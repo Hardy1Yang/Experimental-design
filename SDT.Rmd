@@ -1,0 +1,79 @@
+---
+title: "SDT"
+author: "楊昊紘"
+date: "2020/12/3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r }
+library(tidyverse)
+library(ggplot2)
+Scondition1=c("Same")
+Dcondition1=c("different1","different2","different3","different4")
+realhit1=0.891
+realCR1=c(0.797,0.955,0.976,0.971)
+realhit2=0.967
+realCR2=c(0.646,0.894,0.937,0.969)
+
+fithit1=0.893
+fithit2=0.974
+
+fitCR1=c(0.791,0.950,0.974,0.981)
+fitCR2=c(0.641,0.889,0.946,0.960)
+
+DDM_d1=c(2.33,3.28,3.61,3.78)
+
+DDM_d2=c(2.58,3.56,4,4.17)
+```
+
+## data transform
+
+```{r , echo=FALSE}
+#SDT_real_d1 <-qnorm(realhit1)-qnorm(1-realCR1) 
+SDT_real_d1 <-qnorm((1+sqrt((realhit1+realCR1)-1))/2)*2
+
+#SDT_real_d2 <- qnorm(realhit2)-qnorm(1-realCR2) 
+SDT_real_d2 <- qnorm((1+sqrt((realhit2+realCR2)-1))/2)*2
+
+#SDT_fit_d1 <- qnorm(fithit1)-qnorm(1-fitCR1) 
+
+SDT_fit_d1 <- qnorm((1+sqrt((fithit1+fitCR1)-1))/2)*2
+
+#SDT_fit_d2 <- qnorm(fithit2)-qnorm(1-fitCR2) 
+
+SDT_fit_d2 <- qnorm((1+sqrt((fithit2+fitCR2)-1))/2)*2
+```
+
+$$p_{SD}={p_{YN}}^2+{(1-p_{YN})}^2 \\
+p_{YN}=\Phi(d/2)\\
+p_{SD}={\Phi(d/2)}^2+{(1-\Phi(d/2))}^2 \\
+p_{SD}={\Phi(d/2)}^2+1-2\Phi(d/2)+\Phi(d/2)^2 \\
+p_{SD}=1-2\Phi(d/2)+2\Phi(d/2)^2 \\
+2\Phi(d/2)^2-2\Phi(d/2)+(1-p_{SD})=0 \\
+\Phi(d/2)=\frac{2\pm\sqrt{4-8(1-p_{SD})}}{4} (負不合)\\
+\Phi(d/2)=\frac{1+\sqrt{2p_{SD}-1}}{2}\\
+d=2*Z(\frac{1+\sqrt{2p_{SD}-1}}{2})\\
+$$
+
+```{r}
+Condition=c(rep(c("Cautious same (SDT real prob)"),4),rep(c("Cautious different (SDT real prob)"),4),
+            rep(c("Cautious same (SDT fit prob)"),4),rep(c("Cautious different (SDT fit prob)"),4),
+            rep(c("Cautious same (DDM fit )"),4),rep(c("Cautious different (DDM fit )"),4))
+
+situation=c(rep("SDT d' for real prob",8),rep("SDT d' for fit prob",8),rep("DDM_fit",8))
+Condition=rep(c(rep(c("Cautious same"),4),rep(c("Cautious different"),4)),3)
+Stimulus=rep(c(1,2,3,4),6)
+d_prime=c(SDT_real_d1,SDT_real_d2,SDT_fit_d1,SDT_fit_d2,DDM_d1,DDM_d2)
+sdt.data=data.frame(situation,Condition,Stimulus,d_prime)
+
+ggplot(sdt.data)+aes(x=Stimulus,y=d_prime,color=situation,shape=Condition)+geom_point(size=5,)+
+        geom_line(aes(group=interaction(Condition,situation)))+
+        labs(x="same vs. different i",y="d")
+```
+
